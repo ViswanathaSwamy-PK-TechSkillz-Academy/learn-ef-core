@@ -27,7 +27,7 @@ WriteLine(string.Format("{0,10} | {1,-10} | {2,10}", "Title", " Author".PadRight
 
 foreach (var book in books)
 {
-    Console.WriteLine(string.Format("{0,10} | {1,-10} | {2,10}", book.Title, book.Author.PadRight(35), book.Price));
+    WriteLine(string.Format("{0,10} | {1,-10} | {2,10}", book.Title, book.Author.PadRight(35), book.Price));
 }
 
 new Footer().DisplayFooter('-');
