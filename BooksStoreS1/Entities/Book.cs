@@ -18,7 +18,7 @@ public class Book
 
     public decimal Price { get; set; }
 
-    public int Pages { get; set; }
+    public decimal Pages { get; set; }
 
     public string PictureUrl { get; set; } = string.Empty;
 }
