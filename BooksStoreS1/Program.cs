@@ -20,13 +20,13 @@ new Header().DisplayHeader('=', "Books Store");
 
 var books = await _context.Books.AsNoTracking().ToListAsync();
 
+ForegroundColor = ConsoleColor.DarkCyan;
+
+WriteLine("{0,10} {1,18} {2,30}\n", "Title", "Author", "Price");
+
 foreach (var book in books)
 {
-    Console.WriteLine($"Title: {book.Title}");
-    Console.WriteLine($"Author: {book.Author}");
-    Console.WriteLine($"Price: {book.Price}");
-    Console.WriteLine();
+    Console.WriteLine($"{book.Title, 10} {book.Author, 20} {book.Price, 30}");
 }
-
 
 new Footer().DisplayFooter('-');
