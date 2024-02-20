@@ -5,29 +5,39 @@ using BooksStoreS1.Persistence;
 using Microsoft.EntityFrameworkCore;
 using BooksStoreS1.Entities;
 
-var _configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddUserSecrets<Program>()
-    .Build();
-
-DbContextOptions<BooksStoreDbContext> dbContextOptions = new DbContextOptionsBuilder<BooksStoreDbContext>()
-    .UseSqlServer(_configuration.GetConnectionString("BooksStoreDbContext"))
-    .Options;
-
-BooksStoreDbContext _context = new(dbContextOptions);
+using BooksStoreDbContext _context = GetBooksStoreDbContext();
 
 new Header().DisplayHeader('=', "Books Store");
 
-var books = await _context.Books.AsNoTracking().ToListAsync();
+List<Book>? books = await _context.Books.AsNoTracking().ToListAsync();
 
 ForegroundColor = ConsoleColor.DarkCyan;
 
 WriteLine(string.Format("{0,10} | {1,-10} | {2,10}", "Title", " Author".PadRight(35), "Price"));
 
-foreach (var book in books)
+foreach (Book? book in books)
 {
     WriteLine(string.Format("{0,10} | {1,-10} | {2,10}", book.Title, book.Author.PadRight(35), book.Price));
 }
 
 new Footer().DisplayFooter('-');
+
+static BooksStoreDbContext GetBooksStoreDbContext()
+{
+    IConfigurationRoot _configuration = GetConfigurationRoot();
+
+    DbContextOptions<BooksStoreDbContext> dbContextOptions = new DbContextOptionsBuilder<BooksStoreDbContext>()
+    .UseSqlServer(_configuration.GetConnectionString("BooksStoreDbContext"))
+    .Options;
+
+    return new(dbContextOptions);
+}
+
+static IConfigurationRoot GetConfigurationRoot()
+{
+    return new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .AddUserSecrets<Program>()
+        .Build();
+}
