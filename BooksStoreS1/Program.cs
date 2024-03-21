@@ -7,8 +7,6 @@ using BooksStoreS1.Entities;
 
 using BooksStoreDbContext _context = GetBooksStoreDbContext();
 
-_context.Database.EnsureCreated();
-
 new Header().DisplayHeader('=', "Books Store");
 
 List<Book>? books = await _context.Books.AsNoTracking().ToListAsync();
