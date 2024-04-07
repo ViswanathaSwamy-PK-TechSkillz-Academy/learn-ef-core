@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Publisher.Data;
+using PublisherApp.Configuration;
 
 
 new Header().DisplayHeader('=', "Books Publisher");
@@ -19,7 +20,7 @@ new Footer().DisplayFooter('-');
 
 static PublishersDbContext GetPublishersDbContext()
 {
-    IConfigurationRoot _configuration = GetConfigurationRoot();
+    IConfigurationRoot _configuration = new ConfigurationBuilder().GetConfigurationRoot();
 
     DbContextOptions<PublishersDbContext> dbContextOptions = new DbContextOptionsBuilder<PublishersDbContext>()
     .UseSqlServer(_configuration.GetConnectionString("PublishersDbContext"))
@@ -28,11 +29,11 @@ static PublishersDbContext GetPublishersDbContext()
     return new(dbContextOptions);
 }
 
-static IConfigurationRoot GetConfigurationRoot()
-{
-    return new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .AddUserSecrets<Program>()
-        .Build();
-}
+//static IConfigurationRoot GetConfigurationRoot()
+//{
+//    return new ConfigurationBuilder()
+//        .SetBasePath(Directory.GetCurrentDirectory())
+//        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+//        .AddUserSecrets<Program>()
+//        .Build();
+//}
