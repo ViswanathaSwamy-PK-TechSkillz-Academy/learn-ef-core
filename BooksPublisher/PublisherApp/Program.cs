@@ -16,27 +16,27 @@ WriteLine("Database is created.\n");
 
 ForegroundColor = ConsoleColor.DarkGreen;
 WriteLine("Adding author to the database...");
-AddAuthor(new Author { FirstName = "John", LastName = "Doe" });
+await AddAuthor(new Author { FirstName = "John", LastName = "Doe" });
 WriteLine("Successfully added author to the database...");
 
 new Header().DisplayHeader('=', "Books Publisher");
 
 ForegroundColor = ConsoleColor.DarkCyan;
 
-GetAuthors();
+await GetAuthors();
 
 new Footer().DisplayFooter('-');
 
-void AddAuthor(Author author)
+async Task AddAuthor(Author author)
 {
-    _context.Authors.Add(author);
+    await _context.Authors.AddAsync(author);
 
-    _ = _context.SaveChanges();
+    _ = await _context.SaveChangesAsync();
 }
 
-void GetAuthors()
+async Task GetAuthors()
 {
-    var authors = _context.Authors.ToList();
+    var authors = await _context.Authors.ToListAsync();
     foreach (var author in authors)
     {
         WriteLine(author.FirstName + " " + author.LastName);
