@@ -27,10 +27,13 @@ new Header().DisplayHeader('=', "Books Publisher");
 
 ForegroundColor = ConsoleColor.DarkCyan;
 
+WriteLine($"{"ID",-5} | {"First Name",-15} | {"Last Name",-15}");
+WriteLine(new string('-', 40));
+
 IReadOnlyCollection<Author> authors = await authorService.GetAuthors();
 foreach (Author author in authors)
 {
-    WriteLine($"{author.Id} | {author.FirstName} | {author.LastName}");
+    WriteLine($"{author.Id,-5} | {author.FirstName,-15} | {author.LastName,-15}");
 }
 
 new Footer().DisplayFooter('-');
