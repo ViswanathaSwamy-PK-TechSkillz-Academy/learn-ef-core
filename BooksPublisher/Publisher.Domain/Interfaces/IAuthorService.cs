@@ -6,5 +6,5 @@ public interface IAuthorService
 {
     Task AddAuthor(Author author);
 
-    Task<IEnumerable<Author>> GetAuthors();
+    Task<IReadOnlyCollection<Author>> GetAuthors();
 }
