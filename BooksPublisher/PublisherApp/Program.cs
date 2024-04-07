@@ -1,39 +1,19 @@
 ﻿using HeaderFooter;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Publisher.Data;
 using PublisherApp.Configuration;
+using PublisherApp.Data;
 
-
-new Header().DisplayHeader('=', "Books Publisher");
-
-using PublishersDbContext _context = GetPublishersDbContext();
+IConfigurationRoot configuration = new ConfigurationBuilder().GetConfigurationRoot();
+using PublishersDbContext _context = configuration.GetPublishersDbContext();
 
 ForegroundColor = ConsoleColor.DarkMagenta;
 WriteLine("Database is being created...");
 _context.Database.EnsureCreated();
-WriteLine("Database is created.");
+WriteLine("Database is created.\n");
+
+new Header().DisplayHeader('=', "Books Publisher");
 
 ForegroundColor = ConsoleColor.DarkCyan;
 
 new Footer().DisplayFooter('-');
-
-static PublishersDbContext GetPublishersDbContext()
-{
-    IConfigurationRoot _configuration = new ConfigurationBuilder().GetConfigurationRoot();
-
-    DbContextOptions<PublishersDbContext> dbContextOptions = new DbContextOptionsBuilder<PublishersDbContext>()
-    .UseSqlServer(_configuration.GetConnectionString("PublishersDbContext"))
-    .Options;
-
-    return new(dbContextOptions);
-}
-
-//static IConfigurationRoot GetConfigurationRoot()
-//{
-//    return new ConfigurationBuilder()
-//        .SetBasePath(Directory.GetCurrentDirectory())
-//        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-//        .AddUserSecrets<Program>()
-//        .Build();
-//}
