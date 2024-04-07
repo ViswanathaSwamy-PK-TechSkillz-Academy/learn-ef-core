@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Publisher.Data;
-using Publisher.Domain;
+using Publisher.Domain.Entities;
 using PublisherApp.Configuration;
 using PublisherApp.Data;
 
