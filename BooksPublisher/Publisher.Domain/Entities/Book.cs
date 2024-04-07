@@ -1,4 +1,4 @@
-﻿namespace Publisher.Domain;
+﻿namespace Publisher.Domain.Entities;
 
 public class Book
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Publisher.Domain;
+using Publisher.Domain.Entities;
 
 namespace Publisher.Data;
 
