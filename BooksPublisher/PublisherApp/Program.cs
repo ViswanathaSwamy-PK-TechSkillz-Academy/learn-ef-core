@@ -1,5 +1,4 @@
 ﻿using HeaderFooter;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Publisher.Data;
 using Publisher.Domain.Entities;

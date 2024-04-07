@@ -17,6 +17,8 @@ public class AuthorService(PublishersDbContext context) : IAuthorService
 
     public async Task<IReadOnlyCollection<Author>> GetAuthors()
     {
-        return await _context.Authors.ToListAsync();
+        return await _context.Authors
+                            .Include(a => a.Books)
+                            .ToListAsync();
     }
 }
